@@ -22,7 +22,23 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name="Britnie-Ann Gray") #Name changed from 'Mary Jane'
+
+#Added routes to starter template
+@app.route('/properties/create/') #Routing for the form page to add new properties
+def create():
+    """Render website's create form page."""
+    return render_template('create.html')
+
+@app.route('/properties/') #Routing for the page to load all property listings
+def properties():
+    """Render the website's list of properties page"""
+    return render_template('properties.html')
+
+app.route('/properties/<int: propertyid>/') #Routing for the page that only displays information on a selected property
+def specificProperty(propertyid):
+    """Render a page showing all information on a specific property"""
+    return render_template('property.html')
 
 
 ###
