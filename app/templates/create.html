@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block main %}
+<form method="POST" enctype="multipart/form-data">
+    {{form.hidden_tag()}}
+    {{form.Title.label}} {{form.Title()}} <br>
+    {{form.Number_of_Bedrooms.label}} {{form.Number_of_Bedrooms()}} <br>
+    {{form.Number_of_Bathrooms.label}} {{form.Number_of_Bathrooms()}} <br>
+    {{form.Location.label}} {{form.Location()}} <br>
+    {{form.Price.label}} {{form.Price()}} <br>
+
+    {{form.Property.label}} {{form.Title()}} <br>
+</form>
+{% endblock %}
