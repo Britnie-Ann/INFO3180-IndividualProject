@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 {% block main %}
-<form method="POST" enctype="multipart/form-data">
-    {{form.hidden_tag()}}
-    {{form.Title.label}} {{form.Title()}} <br>
-    {{form.Number_of_Bedrooms.label}} {{form.Number_of_Bedrooms()}} <br>
-    {{form.Number_of_Bathrooms.label}} {{form.Number_of_Bathrooms()}} <br>
-    {{form.Location.label}} {{form.Location()}} <br>
-    {{form.Price.label}} {{form.Price()}} <br>
+    <form method="POST" action = "{{url_for('create')}}" enctype="multipart/form-data"> 
+        {{form.csrf_token}}
+        <div class = "formGroup">
+            <!--Generating title, bedroom number, bathroom number, property location and price-->
+            {{form.Title.label}} {{form.Title()}} <br>
+            {{form.Number_of_Bedrooms.label}} {{form.Number_of_Bedrooms()}} <br>
+            {{form.Number_of_Bathrooms.label}} {{form.Number_of_Bathrooms()}} <br>
+            {{form.Location.label}} {{form.Location()}} <br>
+            {{form.Price.label}} {{form.Price()}} <br>
 
-    {{form.Property.label}} {{form.Title()}} <br>
-</form>
+            <!--Generating property type, description and a picture-->
+            {{form.Type.label}} {{form.Type()}} <br>
+            {{form.Description.label}} {{form.Description()}} <br>
+            {{form.Picture.label}} {{form.Picture()}} <br>
+
+            <!--Submit button-->
+            {{form.Submit(class = "button")}} 
+        </div>
+
+    </form>
 {% endblock %}

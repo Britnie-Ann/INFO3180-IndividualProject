@@ -4,9 +4,12 @@ Jinja2 Documentation:    https://jinja.palletsprojects.com/
 Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file contains the routes for your application.
 """
-
-from app import app
-from flask import render_template, request, redirect, url_for
+import os
+from app import app, DB
+from flask import render_template, request, redirect, url_for, flash
+from app.propertyform import AddNewProperty
+from werkzeug.utils import secure_filename
+from app.models import Property
 
 
 ###
@@ -27,13 +30,40 @@ def about():
 #Added routes to starter template
 @app.route('/properties/create/') #Routing for the form page to add new properties
 def create():
-    """Render website's create form page."""
-    return render_template('create.html')
+    form = AddNewProperty()
+
+    if form.validate_on_submit():
+        photo = form.Picture.data
+        filename = secure_filename(photo.filename)
+
+        #Saving Image to a path
+        photoPath = os.path.join(app.static['UPLOAD_FOLDER'], filename)
+        photo.save(photoPath)
+
+        #Creating new propery object
+        New_Property = Property(
+        title = form.Title.data,
+        bedrooms = form.Number_of_Bedrooms.data,
+        bathrooms = form.Number_of_Bathrooms.data,
+        location = form.Location.data,
+        price = form.Price.data,
+        property_type = form.Type.data,
+        description = form.Description.data,
+        photo = filename)
+
+        #Saving new property to database
+        DB.session.add(New_Property)
+        DB.session.commit()
+
+        flash('New property successfully added', 'success')
+
+        return redirect(url_for('properties'))
+    return render_template('create.html', form=form)
 
 @app.route('/properties/') #Routing for the page to load all property listings
 def properties():
-    """Render the website's list of properties page"""
-    return render_template('properties.html')
+    all_properties = Property.query.all()
+    return render_template('properties.html', properties = all_properties)
 
 app.route('/properties/<int: propertyid>/') #Routing for the page that only displays information on a selected property
 def specificProperty(propertyid):
