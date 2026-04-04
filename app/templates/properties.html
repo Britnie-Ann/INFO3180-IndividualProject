@@ -1,5 +1,17 @@
 {% extends "base.html" %}
 
 {% block main %}
-<p>List of properties</p>
+    <h1>Properties</h1>
+    <div class="propertyList">
+        {% for property in prooperties %}
+        <div class="propertyCard">
+            <img src="{{Property.photo}}" alt="{{Property.title}}" width="300">
+            <h2>{{Property.title}}</h2>
+            <p>{{Property.location}}</p>
+            <p>${{"{:,.2f}".format(property.price)}}</p>
+            <a href="{{url_for('specificProperty', property_id=property.id)}}">
+                <button>View Property</button>
+            </a>
+        </div>
+    </div>
 {% endblock %}

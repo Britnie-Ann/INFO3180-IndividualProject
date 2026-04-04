@@ -67,8 +67,8 @@ def properties():
 
 app.route('/properties/<int: propertyid>/') #Routing for the page that only displays information on a selected property
 def specificProperty(propertyid):
-    """Render a page showing all information on a specific property"""
-    return render_template('property.html')
+    property = Property.query.get_or_404(propertyid)
+    return render_template('property.html', property=property)
 
 
 ###
