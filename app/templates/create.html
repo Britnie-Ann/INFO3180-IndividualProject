@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block main %}
+    <h1>Add New Property</h1>
     <form method="POST" action = "{{url_for('create')}}" enctype="multipart/form-data"> 
         {{form.csrf_token}}
         <div class = "formGroup">
