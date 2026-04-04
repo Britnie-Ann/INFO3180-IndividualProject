@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block main %}
+    <div class="propertyDetail">
+        <h1>{{Property.title}}</h1>
+        <img src="{{Property.photo}}" alt="{{Property.title}}" width="500">
+        <p>{{Property.price}}</p>
+        <p>{{Property.property_type}}</p>
+        <p>{{Property.description}}</p>
+        <p>{{Propperty.bedrooms}}</p>
+        <p>{{Property.bathrooms}}</p>
+        <p>{{Property.location}}</p>
+        <button>Email Realtor</button>
+    </div>
+{% endblock %}
