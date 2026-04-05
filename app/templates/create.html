@@ -1,24 +1,35 @@
 {% extends "base.html" %}
 {% block main %}
-    <h1>Add New Property</h1>
-    <form method="POST" action = "{{url_for('create')}}" enctype="multipart/form-data"> 
-        {{form.csrf_token}}
-        <div class = "formGroup">
-            <!--Generating title, bedroom number, bathroom number, property location and price-->
-            {{form.Title.label}} {{form.Title()}} <br>
-            {{form.Number_of_Bedrooms.label}} {{form.Number_of_Bedrooms()}} <br>
-            {{form.Number_of_Bathrooms.label}} {{form.Number_of_Bathrooms()}} <br>
-            {{form.Location.label}} {{form.Location()}} <br>
-            {{form.Price.label}} {{form.Price()}} <br>
+    <body>
+        <h1 class="newProperty">Add New Property</h1>
+        <div class="body">
+            <div class = "formGroup">
+                <form method="POST" action = "{{url_for('create')}}" enctype="multipart/form-data"> 
+                    {{form.csrf_token}}
+                    <!--Generating title and description inputs on new lines-->
+                    {{form.Title.label}} <br> {{form.Title()}} <br>
+                    {{form.Description.label}}<br> {{form.Description(rows='5')}} <br>
 
-            <!--Generating property type, description and a picture-->
-            {{form.Type.label}} {{form.Type()}} <br>
-            {{form.Description.label}} {{form.Description()}} <br>
-            {{form.Picture.label}} {{form.Picture()}} <br>
+                    <!--Number of bathrooms and bedrooms-->
+                    <div class = "formRows">
+                        <div>{{form.Number_of_Bedrooms.label}}<br> {{form.Number_of_Bedrooms()}}<br></div>
+                        <div>{{form.Number_of_Bathrooms.label}} <br> {{form.Number_of_Bathrooms()}} <br></div>
+                    </div>
 
-            <!--Submit button-->
-            {{form.Submit(class = "button")}} 
+                    <!--Generating property price and type fields-->
+                    <div class = "formRows">
+                        <div>{{form.Price.label}}<br> {{form.Price()}} <br></div>
+                        <div>{{form.Type.label}}<br> {{form.Type()}} <br></div>
+                    </div>
+
+                    <!--Generating property location and picture-->
+                    {{form.Location.label}}<br> {{form.Location()}} <br>
+                    {{form.Picture.label}}<br> {{form.Picture()}} <br>
+                    
+                    <!--Submit button-->
+                    {{form.Submit(class = "button")}} 
+                </form>
+            </div>
         </div>
-
-    </form>
+    </body>
 {% endblock %}

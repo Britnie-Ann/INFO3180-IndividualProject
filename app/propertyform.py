@@ -4,10 +4,10 @@ from wtforms.validators import InputRequired
 from flask_wtf.file import FileRequired, FileAllowed
 
 class AddNewProperty(FlaskForm):
-    Title = StringField('Property Name', validators = [InputRequired()])
-    Number_of_Bedrooms = StringField('Number of Bedrooms', validators = [InputRequired()])
-    Number_of_Bathrooms = StringField('Number of Bathrooms', validators = [InputRequired()])
-    Location = StringField('Address', validators = [InputRequired()])
+    Title = StringField('Property Title', validators = [InputRequired()])
+    Number_of_Bedrooms = StringField('No. of Rooms', validators = [InputRequired()])
+    Number_of_Bathrooms = StringField('No. of Bathrooms', validators = [InputRequired()])
+    Location = StringField('Location', validators = [InputRequired()])
     Price = StringField('Price', validators = [InputRequired()])
     Type = SelectField('Property Type', choices = [('', 'Please select'), ('house', 'House'), ('apartment', 'Apartment')], validators = [InputRequired()])
     Description = TextAreaField('Description', validators = [InputRequired()])

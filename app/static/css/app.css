@@ -2,26 +2,41 @@ body {
     padding-top: 5rem;
 }
 
-h1{
-    font-size: large;
+.body{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+/*Stylying for add new property form*/
+.newProperty{
+    font-size: 40px;
     font-weight: bold;
+    margin-bottom: 2%;
 }
 .formGroup{
-    margin-bottom: 20px;
+    width: 50%;
     border: 2px groove #1C1919;
     border-radius: 5px;
-    padding-left: 20px;
-    padding-right: 30px;
+    padding: 2% 5%;
 }
 
-input, textarea{
+.formRows{
+    display: flex;
+    gap: 40px;
+}
+
+input, textarea, select{
     width: 100%;
     padding: 8px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius:4px;
+    resize: none;
 }
 
 .button{
     width: 50%;
+    background-color: #94DCF2;
+    border: 2px groove #00D4F0;
 }
+/*End of Styling*/
