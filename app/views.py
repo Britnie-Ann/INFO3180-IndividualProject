@@ -28,7 +28,7 @@ def about():
     return render_template('about.html', name="Britnie-Ann Gray") #Name changed from 'Mary Jane'
 
 #Added routes to starter template
-@app.route('/properties/create/') #Routing for the form page to add new properties
+@app.route('/properties/create/',  methods=['POST']) #Routing for the form page to add new properties
 def create():
     form = AddNewProperty()
 
@@ -37,8 +37,10 @@ def create():
         filename = secure_filename(photo.filename)
 
         #Saving Image to a path
-        photoPath = os.path.join(app.static['UPLOAD_FOLDER'], filename)
+        photoPath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         photo.save(photoPath)
+
+        draft_price = form.Price.data
 
         #Creating new propery object
         New_Property = Property(
@@ -46,7 +48,7 @@ def create():
         bedrooms = form.Number_of_Bedrooms.data,
         bathrooms = form.Number_of_Bathrooms.data,
         location = form.Location.data,
-        price = form.Price.data,
+        price = float(draft_price.replace(",", "")),
         property_type = form.Type.data,
         description = form.Description.data,
         photo = filename)
@@ -57,7 +59,7 @@ def create():
 
         flash('New property successfully added', 'success')
 
-        return redirect(url_for('properties'))
+        return redirect(url_for('home'))
     return render_template('create.html', form=form)
 
 @app.route('/properties/') #Routing for the page to load all property listings
