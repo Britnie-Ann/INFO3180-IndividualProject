@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-
 {% block main %}
     <h1>Properties</h1>
-    <div class="propertyList">
-        {% for property in prooperties %}
+    <body class="propertyList">
+        {% for property in properties %}
         <div class="propertyCard">
-            <img src="{{Property.photo}}" alt="{{Property.title}}" width="300">
-            <h2>{{Property.title}}</h2>
-            <p>{{Property.location}}</p>
-            <p>${{"{:,.2f}".format(property.price)}}</p>
-            <a href="{{url_for('specificProperty', property_id=property.id)}}">
-                <button>View Property</button>
+            <img src="{{url_for('uploaded_file', filename=property.photo)}}" alt="{{property.title}}">
+            <h2>{{property.title}}</h2>
+            <p class="location">{{property.location}}</p>
+            <p class="price">${{"{:,.2f}".format(property.price)}}</p>
+            <a href="{{url_for('specificProperty', propertyid=property.id)}}">
+                <button class="viewProperty">View Property</button>
             </a>
         </div>
-    </div>
+        {% endfor %}
+    </body>
 {% endblock %}

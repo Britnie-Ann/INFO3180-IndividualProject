@@ -40,3 +40,30 @@ input, textarea, select{
     border: 2px groove #00D4F0;
 }
 /*End of Styling*/
+
+/*Styling for all property listing*/
+.propertyList{
+    display: flexbox;
+    gap: 20px;
+}
+.propertyCard{
+    border: 1px solid #000000;
+    width : 300px;
+    height: 400px;
+}
+
+.viewProperty{
+    display: block;
+    background-color: #42B1E3;
+}
+
+.location{
+    color: #ADBDC4;
+}
+
+.price{
+    border: solid;
+    border-width: 0px;
+    background-color: #40C4FF;
+    width: 50%;
+}

@@ -5,10 +5,10 @@ Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file contains the routes for your application.
 """
 import os
-from app import app, DB
-from flask import render_template, request, redirect, url_for, flash
-from app.propertyform import AddNewProperty
+from flask import render_template, redirect, url_for, flash, send_from_directory
 from werkzeug.utils import secure_filename
+from app import app, DB
+from app.propertyform import AddNewProperty
 from app.models import Property
 
 
@@ -28,7 +28,7 @@ def about():
     return render_template('about.html', name="Britnie-Ann Gray") #Name changed from 'Mary Jane'
 
 #Added routes to starter template
-@app.route('/properties/create/',  methods=['POST']) #Routing for the form page to add new properties
+@app.route('/properties/create/',  methods=['POST', 'GET']) #Routing for the form page to add new properties
 def create():
     form = AddNewProperty()
 
@@ -64,13 +64,17 @@ def create():
 
 @app.route('/properties/') #Routing for the page to load all property listings
 def properties():
-    all_properties = Property.query.all()
+    all_properties = DB.session.execute(DB.select(Property)).scalars()
     return render_template('properties.html', properties = all_properties)
 
-app.route('/properties/<int: propertyid>/') #Routing for the page that only displays information on a selected property
+@app.route('/specificProperty/<int:propertyid>/') #Routing for the page that only displays information on a selected property
 def specificProperty(propertyid):
     property = Property.query.get_or_404(propertyid)
-    return render_template('property.html', property=property)
+    return render_template('property.html', property=property)  
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 ###
